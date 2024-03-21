@@ -7,7 +7,7 @@
 #define OBSIDIAN "obsidian"
 
 /* appearance */
-static unsigned int borderpx  = 0;        /* border pixel of windows */
+static unsigned int borderpx  = 1;        /* border pixel of windows */
 static unsigned int snap      = 32;       /* snap pixel */
 static unsigned int gappih    = 5;       /* horiz inner gap between windows */
 static unsigned int gappiv    = 10;       /* vert inner gap between windows */
@@ -19,10 +19,10 @@ static int showbar            = 1;        /* 0 means no bar */
 static int topbar             = 1;        /* 0 means bottom bar */
 static char *fonts[]          = { "TerminessNerdFontMono:size=10:antialias=true:autohint=true", "NotoColorEmoji:pixelsize=10:antialias=true:autohint=true"  };
 static char normbgcolor[]           = "#000000";
-static char normbordercolor[]       = "#ffffff";
+static char normbordercolor[]       = "#000000";
 static char normfgcolor[]           = "#ff0cd2";
 static char selfgcolor[]            = "#ffffff";
-static char selbordercolor[]        = "#ff0cd2";
+static char selbordercolor[]        = "#781e63";
 static char selbgcolor[]            = "#000000";
 static char *colors[][3] = {
        /*               fg           bg           border   */
