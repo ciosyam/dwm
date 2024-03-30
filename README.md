@@ -1,5 +1,4 @@
-# Luke's build of dwm
-
+# my DWM build
 ## FAQ
 
 > What are the bindings?
