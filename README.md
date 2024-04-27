@@ -8,7 +8,7 @@ works for me though
 ## Installation 
 
 ```bash
-git clone https://github.com/LukeSmithxyz/dwm.git
+git clone https://github.com/ciosyam/dwm.git
 cd dwm
 sudo make install
 ```
