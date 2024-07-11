@@ -1,9 +1,7 @@
 # my DWM build
 ## FAQ
 
-> basic LARBS dwm with my colorscheme, and ... i dont even know what i add
-
-works for me though
+> basic LARBS dwm with my colorscheme, and some changes in key mapping to suit x260 jp keyboard 
 
 ## Installation 
 
