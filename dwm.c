@@ -222,7 +222,6 @@ static void movemouse(const Arg *arg);
 static Client *nexttiled(Client *c);
 static void pop(Client *c);
 static void propertynotify(XEvent *e);
-static void pushstack(const Arg *arg);
 static void quit(const Arg *arg);
 static Monitor *recttomon(int x, int y, int w, int h);
 static void resize(Client *c, int x, int y, int w, int h, int interact);
@@ -1423,29 +1422,6 @@ pop(Client *c)
 	attach(c);
 	focus(c);
 	arrange(c->mon);
-}
-
-void
-pushstack(const Arg *arg) {
-	int i = stackpos(arg);
-	Client *sel = selmon->sel, *c, *p;
-
-	if(i < 0 || !sel)
-		return;
-	else if(i == 0) {
-		detach(sel);
-		attach(sel);
-	}
-	else {
-		for(p = NULL, c = selmon->clients; c; p = c, c = c->next)
-			if(!(i -= (ISVISIBLE(c) && c != sel)))
-				break;
-		c = c ? c : p;
-		detach(sel);
-		sel->next = c->next;
-		c->next = sel;
-	}
-	arrange(selmon);
 }
 
 void

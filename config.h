@@ -7,14 +7,14 @@
 #define OBSIDIAN "obsidian"
 
 /* appearance */
-static unsigned int borderpx  = 0;        /* border pixel of windows */
+static unsigned int borderpx  = 1;        /* border pixel of windows */
 static unsigned int snap      = 0;       /* snap pixel */
-static unsigned int gappih    = 0;       /* horiz inner gap between windows */
-static unsigned int gappiv    = 0;       /* vert inner gap between windows */
-static unsigned int gappoh    = 0;       /* horiz outer gap between windows and screen edge */
-static unsigned int gappov    = 0;       /* vert outer gap between windows and screen edge */
+static unsigned int gappih    = 5;       /* horiz inner gap between windows */
+static unsigned int gappiv    = 10;       /* vert inner gap between windows */
+static unsigned int gappoh    = 5;       /* horiz outer gap between windows and screen edge */
+static unsigned int gappov    = 5;       /* vert outer gap between windows and screen edge */
 static int swallowfloating    = 0;        /* 1 means swallow floating windows by default */
-static int smartgaps          = 0;        /* 1 means no outer gap when there is only one window */
+static int smartgaps          = 1;        /* 1 means no outer gap when there is only one window */
 static int showbar            = 1;        /* 0 means no bar */
 static int topbar             = 1;        /* 0 means bottom bar */
 static char *fonts[]          = { "TerminessNerdFont:size=10:antialias=true:autohint=true", "NotoColorEmoji:pixelsize=10:antialias=true:autohint=true"  };
@@ -138,7 +138,6 @@ ResourcePref resources[] = {
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
 	STACKKEYS(MODKEY,                          focus)
-	STACKKEYS(MODKEY|ShiftMask,                push)
 	/* { MODKEY|ShiftMask,		XK_Escape,	spawn,	SHCMD("") }, */
 	{ MODKEY,			XK_at,	spawn,	{.v = (const char*[]){ "dmenuunicode", NULL } } },
 	/* { MODKEY|ShiftMask,		XK_grave,	togglescratch,	SHCMD("") }, */
@@ -226,10 +225,10 @@ static const Key keys[] = {
 	{ MODKEY,			XK_period,	spawn,		{.v = (const char*[]){ "mpc", "next", NULL } } },
 	{ MODKEY|ShiftMask,		XK_period,	spawn,		{.v = (const char*[]){ "mpc", "repeat", NULL } } },
 
-	{ MODKEY,			XK_Left,	focusmon,	{.i = -1 } },
-	{ MODKEY|ShiftMask,		XK_Left,	tagmon,		{.i = -1 } },
-	{ MODKEY,			XK_Right,	focusmon,	{.i = +1 } },
-	{ MODKEY|ShiftMask,		XK_Right,	tagmon,		{.i = +1 } },
+	{ MODKEY|ShiftMask,			XK_j,	focusmon,	{.i = -1 } },
+	{ MODKEY|ShiftMask,			XK_k,	focusmon,	{.i = +1 } },
+	{ MODKEY|ShiftMask,		XK_h,	tagmon,		{.i = -1 } },
+	{ MODKEY|ShiftMask,		XK_l,	tagmon,		{.i = +1 } },
 
 	{ MODKEY,			XK_Page_Up,	shiftview,	{ .i = -1 } },
 	{ MODKEY|ShiftMask,		XK_Page_Up,	shifttag,	{ .i = -1 } },
