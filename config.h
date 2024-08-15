@@ -17,12 +17,12 @@ static int swallowfloating    = 0;        /* 1 means swallow floating windows by
 static int smartgaps          = 0;        /* 1 means no outer gap when there is only one window */
 static int showbar            = 1;        /* 0 means no bar */
 static int topbar             = 1;        /* 0 means bottom bar */
-static char *fonts[]          = { "TerminessNerdFontMono:size=10:antialias=true:autohint=true", "NotoColorEmoji:pixelsize=10:antialias=true:autohint=true"  };
+static char *fonts[]          = { "TerminessNerdFont:size=10:antialias=true:autohint=true", "NotoColorEmoji:pixelsize=10:antialias=true:autohint=true"  };
 static char normbgcolor[]           = "#000000";
 static char normbordercolor[]       = "#000000";
 static char normfgcolor[]           = "#ff00ff";
 static char selfgcolor[]            = "#b814b8";
-static char selbordercolor[]        = "#080808";
+static char selbordercolor[]        = "#1b1b1b";
 static char selbgcolor[]            = "#000000";
 static char *colors[][3] = {
        /*               fg           bg           border   */
