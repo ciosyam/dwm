@@ -1979,11 +1979,35 @@ tag(const Arg *arg)
 }
 
 void
-tagmon(const Arg *arg)
-{
-	if (!selmon->sel || !mons->next)
-		return;
-	sendmon(selmon->sel, dirtomon(arg->i));
+tagmon(const Arg *arg) {
+    Monitor *m;
+
+    // Check if there is a selected window and if there are multiple monitors
+    if (!selmon->sel || !mons->next)
+        return;
+
+    // Get the target monitor
+    m = dirtomon(arg->i);
+    if (!m) // Check if the target monitor is valid
+        return;
+
+    // Send the selected window to the target monitor
+    sendmon(selmon->sel, m);
+
+    // Focus on the target monitor
+    unfocus(selmon->sel, 0); // Unfocus the current window
+    selmon = m;              // Switch to the target monitor
+    focus(NULL);             // Focus the new monitor
+
+    // Warp the pointer to the center of the newly focused window, if it exists
+    if (selmon->sel) {
+        warp(selmon->sel);
+    } else {
+        // Optionally, warp to the center of the monitor if no window is selected
+        int x = selmon->mx + selmon->mw / 2;
+        int y = selmon->my + selmon->mh / 2;
+        XWarpPointer(dpy, None, selmon->barwin, 0, 0, 0, 0, x, y);
+    }
 }
 
 void
