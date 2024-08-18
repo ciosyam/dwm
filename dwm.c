@@ -997,17 +997,32 @@ focusin(XEvent *e)
 }
 
 void
-focusmon(const Arg *arg)
-{
-	Monitor *m;
+warp(const Client *c) {
+    int x, y;
 
-	if (!mons->next)
-		return;
-	if ((m = dirtomon(arg->i)) == selmon)
-		return;
-	unfocus(selmon->sel, 0);
-	selmon = m;
-	focus(NULL);
+    if (!c) {
+        if (!selmon->sel)
+            return;
+        c = selmon->sel;
+    }
+
+    x = c->x + c->w / 2;
+    y = c->y + c->h / 2;
+    XWarpPointer(dpy, None, c->win, 0, 0, 0, 0, x, y);
+}
+
+void
+focusmon(const Arg *arg) {
+    Monitor *m;
+
+    if (!mons->next)
+        return;
+    if ((m = dirtomon(arg->i)) == selmon)
+        return;
+    unfocus(selmon->sel, 0);
+    selmon = m;
+    focus(NULL);
+    warp(selmon->sel);
 }
 
 void
