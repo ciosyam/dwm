@@ -7,13 +7,13 @@
 #define OBSIDIAN "obsidian"
 
 /* appearance */
-static unsigned int borderpx  = 0;        /* border pixel of windows */
+static unsigned int borderpx  = 1;        /* border pixel of windows */
 static unsigned int snap      = 0;       /* snap pixel */
-static unsigned int gappih    = 5;       /* horiz inner gap between windows */
-static unsigned int gappiv    = 10;       /* vert inner gap between windows */
-static unsigned int gappoh    = 5;       /* horiz outer gap between windows and screen edge */
-static unsigned int gappov    = 5;       /* vert outer gap between windows and screen edge */
-static int swallowfloating    = 0;        /* 1 means swallow floating windows by default */
+static unsigned int gappih    = 0;       /* horiz inner gap between windows */
+static unsigned int gappiv    = 0;       /* vert inner gap between windows */
+static unsigned int gappoh    = 0;       /* horiz outer gap between windows and screen edge */
+static unsigned int gappov    = 0;       /* vert outer gap between windows and screen edge */
+static int swallowfloating    = 1;        /* 1 means swallow floating windows by default */
 static int smartgaps          = 1;        /* 1 means no outer gap when there is only one window */
 static int showbar            = 1;        /* 0 means no bar */
 static int topbar             = 1;        /* 0 means bottom bar */
@@ -22,7 +22,7 @@ static char normbgcolor[]           = "#000000";
 static char normbordercolor[]       = "#000000";
 static char normfgcolor[]           = "#ff00ff";
 static char selfgcolor[]            = "#b814b8";
-static char selbordercolor[]        = "#1b1b1b";
+static char selbordercolor[]        = "#2b1329";
 static char selbgcolor[]            = "#000000";
 static char *colors[][3] = {
        /*               fg           bg           border   */
@@ -167,12 +167,12 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,		XK_e,		spawn,		SHCMD(TERMINAL " -e abook -C ~/.config/abook/abookrc --datafile ~/.config/abook/addressbook") },
 	{ MODKEY,			XK_r,		spawn,		{.v = (const char*[]){ TERMINAL, "-e", "lfub", NULL } } },
 	{ MODKEY|ShiftMask,		XK_r,		spawn,		{.v = (const char*[]){ TERMINAL, "-e", "htop", NULL } } },
-	{ MODKEY,			XK_t,		setlayout,	{.v = &layouts[0]} }, /* monocle */
+	{ MODKEY,			XK_t,		setlayout,	{.v = &layouts[5]} }, /* tile */
 	{ MODKEY|ShiftMask,		XK_t,		setlayout,	{.v = &layouts[1]} }, /* bstack */
 	{ MODKEY,			XK_y,		setlayout,	{.v = &layouts[2]} }, /* spiral */
 	{ MODKEY|ShiftMask,		XK_y,		setlayout,	{.v = &layouts[3]} }, /* dwindle */
 	{ MODKEY,			XK_u,		setlayout,	{.v = &layouts[4]} }, /* deck */
-	{ MODKEY|ShiftMask,		XK_u,		setlayout,	{.v = &layouts[5]} }, /* tile */
+	{ MODKEY|ShiftMask,		XK_u,		setlayout,	{.v = &layouts[0]} }, /* monocle */
 	{ MODKEY,			XK_i,		setlayout,	{.v = &layouts[6]} }, /* centeredmaster */
 	{ MODKEY|ShiftMask,		XK_i,		setlayout,	{.v = &layouts[7]} }, /* centeredfloatingmaster */
 	{ MODKEY,			XK_o,		incnmaster,     {.i = +1 } },

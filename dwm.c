@@ -1011,6 +1011,7 @@ warp(const Client *c) {
     XWarpPointer(dpy, None, c->win, 0, 0, 0, 0, x, y);
 }
 
+/*added function to immediately focus on changed window*/
 void
 focusmon(const Arg *arg) {
     Monitor *m;
@@ -1765,18 +1766,37 @@ stackpos(const Arg *arg) {
 		return arg->i;
 }
 
+/*turn border to 0 in monocle mode*/
 void
 setlayout(const Arg *arg)
 {
-	if (!arg || !arg->v || arg->v != selmon->lt[selmon->sellt])
-		selmon->sellt ^= 1;
-	if (arg && arg->v)
-		selmon->lt[selmon->sellt] = (Layout *)arg->v;
-	strncpy(selmon->ltsymbol, selmon->lt[selmon->sellt]->symbol, sizeof selmon->ltsymbol);
-	if (selmon->sel)
-		arrange(selmon);
-	else
-		drawbar(selmon);
+    Clr newNormBorder, newSelBorder;
+
+    if (!arg || !arg->v || arg->v != selmon->lt[selmon->sellt]) {
+        selmon->sellt ^= 1;
+    }
+    if (arg && arg->v)
+        selmon->lt[selmon->sellt] = (Layout *)arg->v;
+
+    if (selmon->lt[selmon->sellt]->arrange == monocle) {
+        // Change border color when in monocle mode
+        drw_clr_create(drw, &newNormBorder, "#000000");
+        drw_clr_create(drw, &newSelBorder, "#000000");
+        scheme[SchemeNorm][ColBorder] = newNormBorder;
+        scheme[SchemeSel][ColBorder] = newSelBorder;
+    } else {
+        // Revert to original border color based on focus
+        drw_clr_create(drw, &newNormBorder, normbordercolor);
+        drw_clr_create(drw, &newSelBorder, selbordercolor);
+        scheme[SchemeNorm][ColBorder] = newNormBorder;
+        scheme[SchemeSel][ColBorder] = newSelBorder;
+    }
+
+    strncpy(selmon->ltsymbol, selmon->lt[selmon->sellt]->symbol, sizeof selmon->ltsymbol);
+    if (selmon->sel)
+        arrange(selmon);
+    else
+        drawbar(selmon);
 }
 
 /* arg > 1.0 will set mfact absolutely */
@@ -1978,6 +1998,7 @@ tag(const Arg *arg)
 	}
 }
 
+/*added function to immediately focus on window after tagging*/
 void
 tagmon(const Arg *arg) {
     Monitor *m;
