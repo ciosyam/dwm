@@ -216,7 +216,6 @@ static void killclient(const Arg *arg);
 static void manage(Window w, XWindowAttributes *wa);
 static void mappingnotify(XEvent *e);
 static void maprequest(XEvent *e);
-static void monocle(Monitor *m);
 static void motionnotify(XEvent *e);
 static void movemouse(const Arg *arg);
 static Client *nexttiled(Client *c);
@@ -460,6 +459,20 @@ arrange(Monitor *m)
 		restack(m);
 	} else for (m = mons; m; m = m->next)
 		arrangemon(m);
+}
+
+void
+setlayout(const Arg *arg)
+{
+	if (!arg || !arg->v || arg->v != selmon->lt[selmon->sellt])
+		selmon->sellt ^= 1;
+	if (arg && arg->v)
+		selmon->lt[selmon->sellt] = (Layout *)arg->v;
+	strncpy(selmon->ltsymbol, selmon->lt[selmon->sellt]->symbol, sizeof selmon->ltsymbol);
+	if (selmon->sel)
+		arrange(selmon);
+	else
+		drawbar(selmon);
 }
 
 void
@@ -1332,21 +1345,6 @@ maprequest(XEvent *e)
 }
 
 void
-monocle(Monitor *m)
-{
-	unsigned int n;
-	int oh, ov, ih, iv;
-	Client *c;
-
-	getgaps(m, &oh, &ov, &ih, &iv, &n);
-
-	if (n > 0) /* override layout symbol */
-		snprintf(m->ltsymbol, sizeof m->ltsymbol, "[%d]", n);
-	for (c = nexttiled(m->clients); c; c = nexttiled(c->next))
-		resize(c, m->wx + ov, m->wy + oh, m->ww - 2 * c->bw - 2 * ov, m->wh - 2 * c->bw - 2 * oh, 0);
-}
-
-void
 motionnotify(XEvent *e)
 {
 	static Monitor *mon = NULL;
@@ -1763,39 +1761,6 @@ stackpos(const Arg *arg) {
 	}
 	else
 		return arg->i;
-}
-
-/*turn border to 0 in monocle mode*/
-void
-setlayout(const Arg *arg)
-{
-    Clr newNormBorder, newSelBorder;
-
-    if (!arg || !arg->v || arg->v != selmon->lt[selmon->sellt]) {
-        selmon->sellt ^= 1;
-    }
-    if (arg && arg->v)
-        selmon->lt[selmon->sellt] = (Layout *)arg->v;
-
-    if (selmon->lt[selmon->sellt]->arrange == monocle) {
-        // Change border color when in monocle mode
-        drw_clr_create(drw, &newNormBorder, "#000000");
-        drw_clr_create(drw, &newSelBorder, "#000000");
-        scheme[SchemeNorm][ColBorder] = newNormBorder;
-        scheme[SchemeSel][ColBorder] = newSelBorder;
-    } else {
-        // Revert to original border color based on focus
-        drw_clr_create(drw, &newNormBorder, normbordercolor);
-        drw_clr_create(drw, &newSelBorder, selbordercolor);
-        scheme[SchemeNorm][ColBorder] = newNormBorder;
-        scheme[SchemeSel][ColBorder] = newSelBorder;
-    }
-
-    strncpy(selmon->ltsymbol, selmon->lt[selmon->sellt]->symbol, sizeof selmon->ltsymbol);
-    if (selmon->sel)
-        arrange(selmon);
-    else
-        drawbar(selmon);
 }
 
 /* arg > 1.0 will set mfact absolutely */
