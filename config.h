@@ -18,12 +18,12 @@ static int smartgaps          = 1;        /* 1 means no outer gap when there is 
 static int showbar            = 1;        /* 0 means no bar */
 static int topbar             = 1;        /* 0 means bottom bar */
 static char *fonts[]          = { "TerminessNerdFont:size=10:antialias=true:autohint=true", "NotoColorEmoji:pixelsize=10:antialias=true:autohint=true"  };
-static char normbgcolor[]           = "#000000";
-static char normbordercolor[]       = "#000000";
-static char normfgcolor[]           = "#ff00ff";
-static char selfgcolor[]            = "#b814b8";
-static char selbordercolor[]        = "#501a4f";
-static char selbgcolor[]            = "#000000";
+static char normbgcolor[]     = "#000000";
+static char normbordercolor[] = "#000000";
+static char normfgcolor[]     = "#ff00ff";
+static char selfgcolor[]      = "#b814b8";
+static char selbordercolor[]  = "#501a4f";
+static char selbgcolor[]      = "#000000";
 static char *colors[][3] = {
        /*               fg           bg           border   */
        [SchemeNorm] = { normfgcolor, normbgcolor, normbordercolor },

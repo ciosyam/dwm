@@ -1499,12 +1499,12 @@ void
 resize(Client *c, int x, int y, int w, int h, int interact)
 {
     if (c->isfloating) {
-        w = MIN(w, 850); // set max width to 750
-        h = MIN(h, 600); // set max height to 500
+        w = MIN(w, 900); // set max width to 750
+        h = MIN(h, 650); // set max height to 500
 
         // Center the window on the current monitor
-        x = mons->wx + (mons->ww - w) / 2;
-        y = mons->wy + (mons->wh - h) / 2;
+        x = c->mon->wx + (c->mon->ww - w) / 2;
+        y = c->mon->wy + (c->mon->wh - h) / 2;
     }
     if (applysizehints(c, &x, &y, &w, &h, interact))
         resizeclient(c, x, y, w, h);
