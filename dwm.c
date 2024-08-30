@@ -1495,6 +1495,7 @@ recttomon(int x, int y, int w, int h)
 	return r;
 }
 
+/*added fixed float value*/
 void
 resize(Client *c, int x, int y, int w, int h, int interact)
 {

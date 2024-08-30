@@ -44,14 +44,16 @@ setgaps(int oh, int ov, int ih, int iv)
 	arrange(selmon);
 }
 
-/*added function toggle border*/
+/*toggle border*/
 void
 toggleborder(const Arg *arg)
 {
     for (Client *c = selmon->clients; c; c = c->next) {
-        c->bw = (c->bw == 0) ? borderpx : 0; // Toggle border width
-        if (c->bw == 0) {
-            c->oldbw = borderpx; // Save the original border width
+        if (c->bw == 0) { // If border is currently disabled
+            c->bw = (c->oldbw > 0) ? c->oldbw : 1; // Restore original border width or use 1 if not set
+        } else { // If border is currently enabled
+            c->oldbw = c->bw; // Save the current border width
+            c->bw = 0; // Disable the border
         }
     }
     arrange(selmon); // Rearrange the windows to apply the change
