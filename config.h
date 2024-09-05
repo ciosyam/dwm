@@ -21,7 +21,7 @@ static char *fonts[]          = { "TerminessNerdFont:size=10:antialias=true:auto
 static char normbgcolor[]     = "#000000";
 static char normbordercolor[] = "#000000";
 static char normfgcolor[]     = "#ff00ff";
-static char selfgcolor[]      = "#b814b8";
+static char selfgcolor[]      = "#de00e0";
 static char selbordercolor[]  = "#501a4f";
 static char selbgcolor[]      = "#000000";
 static char *colors[][3] = {
@@ -46,18 +46,18 @@ static Sp scratchpads[] = {
 static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 
 static const Rule rules[] = {
-    /* class    instance      title        tags mask    isfloating   isterminal  noswallow  monitor */
-    { "Gimp",   NULL,         NULL,        1 << 8,       0,           0,         0,        -1 },
-    { TERMCLASS, NULL,        NULL,        0,            0,           1,         0,        -1 },
-    { NULL,     NULL,         "Event Tester", 0,         0,           0,         1,        -1 },
-    { TERMCLASS, "floatterm", NULL,        0,            1,           1,         0,        -1 },
-    { TERMCLASS, "bg",        NULL,        1 << 7,       0,           1,         0,        -1 },
-    { TERMCLASS, "spterm",    NULL,        SPTAG(0),     1,           1,         0,        -1 },
-    { TERMCLASS, "spcalc",    NULL,        SPTAG(1),     1,           1,         0,        -1 },
-    { NULL,     NULL,         "ncmpcpp",   0,            1,           0,         0,        -1 },
-    { NULL,     NULL,         "pulsemixer", 0,            1,           0,         0,        -1 },
-    { NULL,     NULL,         "bluetui",   0,            1,           0,         0,        -1 },
-    { NULL,     NULL,         "nmtui",   0,            1,           0,         0,        -1 },
+/* class      instance      title          tags mask   isfloating  isterminal  noswallow  monitor */
+{ "Gimp",     NULL,         NULL,           1 << 8,    0,          0,          0,         -1 },
+{ TERMCLASS,  NULL,         NULL,           0,         0,          1,          0,         -1 },
+{ NULL,       NULL,         "Event Tester", 0,         0,          0,          1,         -1 },
+{ TERMCLASS,  "floatterm",  NULL,           0,         1,          1,          0,         -1 },
+{ TERMCLASS,  "bg",         NULL,           1 << 7,    0,          1,          0,         -1 },
+{ TERMCLASS,  "spterm",     NULL,           SPTAG(0),  1,          1,          0,         -1 },
+{ TERMCLASS,  "spcalc",     NULL,           SPTAG(1),  1,          1,          0,         -1 },
+{ NULL,       NULL,         "ncmpcpp",      0,         1,          0,          0,         -1 },
+{ NULL,       NULL,         "pulsemixer",   0,         1,          0,          0,         -1 },
+{ NULL,       NULL,         "bluetui",      0,         1,          0,          0,         -1 },
+{ NULL,       NULL,         "nmtui",        0,         1,          0,          0,         -1 },
 };
 
 /* layout(s) */
