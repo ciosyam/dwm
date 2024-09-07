@@ -48,15 +48,29 @@ setgaps(int oh, int ov, int ih, int iv)
 void
 toggleborder(const Arg *arg)
 {
-    for (Client *c = selmon->clients; c; c = c->next) {
-        if (c->bw == 0) { // If border is currently disabled
-            c->bw = (c->oldbw > 0) ? c->oldbw : 1; // Restore original border width or use 1 if not set
-        } else { // If border is currently enabled
-            c->oldbw = c->bw; // Save the current border width
-            c->bw = 0; // Disable the border
+    Client *c;
+    unsigned int newbw;
+
+    /* Determine new border width based on current state */
+    newbw = (selmon->clients && selmon->clients->bw == 0) ? 1 : 0;
+
+    /* Iterate over all clients on the selected monitor */
+    for (c = selmon->clients; c; c = c->next) {
+        if (newbw == 0) {
+            /* Save current border width before disabling */
+            c->oldbw = c->bw;
+        } else if (c->bw == 0) {
+            /* Restore border width if it was previously disabled */
+            c->bw = (c->oldbw > 0) ? c->oldbw : 1;
         }
+
+        /* Update border width */
+        c->bw = newbw;
     }
-    arrange(selmon); // Rearrange the windows to apply the change
+
+    /* Apply the changes and force a redraw */
+    arrange(selmon);
+    XFlush(dpy);
 }
 
 static void
