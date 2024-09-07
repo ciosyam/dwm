@@ -880,59 +880,48 @@ dirtomon(int dir)
 void
 drawbar(Monitor *m)
 {
-    int x, w, tw = 0;
-    unsigned int i, occ = 0, urg = 0;
-    Client *c;
-    char music[256];  // Buffer to store the music info
-    FILE *fp;
+	int x, w, tw = 0;
+	unsigned int i, occ = 0, urg = 0;
+	Client *c;
 
-    if (!m->showbar)
-        return;
+	if (!m->showbar)
+		return;
 
-    /* draw status first so it can be overdrawn by tags later */
-    if (m == selmon) { /* status is only drawn on selected monitor */
-        drw_setscheme(drw, scheme[SchemeNorm]);
-        tw = TEXTW(stext) - lrpad + 2; /* 2px right padding */
-        drw_text(drw, m->ww - tw, 0, tw, bh, 0, stext, 0);
-    }
+	/* draw status first so it can be overdrawn by tags later */
+	if (m == selmon) { /* status is only drawn on selected monitor */
+		drw_setscheme(drw, scheme[SchemeNorm]);
+		tw = TEXTW(stext) - lrpad + 2; /* 2px right padding */
+		drw_text(drw, m->ww - tw, 0, tw, bh, 0, stext, 0);
+	}
 
-    for (c = m->clients; c; c = c->next) {
-        occ |= c->tags == 255 ? 0 : c->tags;
-        if (c->isurgent)
-            urg |= c->tags;
-    }
-    x = 0;
-    for (i = 0; i < LENGTH(tags); i++) {
-        /* do not draw vacant tags */
-        if (!(occ & 1 << i || m->tagset[m->seltags] & 1 << i))
-            continue;
+	for (c = m->clients; c; c = c->next) {
+		occ |= c->tags == 255 ? 0 : c->tags;
+		if (c->isurgent)
+			urg |= c->tags;
+	}
+	x = 0;
+	for (i = 0; i < LENGTH(tags); i++) {
+		/* do not draw vacant tags */
+		if (!(occ & 1 << i || m->tagset[m->seltags] & 1 << i))
+			continue;
 
-        w = TEXTW(tags[i]);
-        drw_setscheme(drw, scheme[m->tagset[m->seltags] & 1 << i ? SchemeSel : SchemeNorm]);
-        drw_text(drw, x, 0, w, bh, lrpad / 2, tags[i], urg & 1 << i);
-        x += w;
-    }
-    w = TEXTW(m->ltsymbol);
-    drw_setscheme(drw, scheme[SchemeNorm]);
-    x = drw_text(drw, x, 0, w, bh, lrpad / 2, m->ltsymbol, 0);
+		w = TEXTW(tags[i]);
+		drw_setscheme(drw, scheme[m->tagset[m->seltags] & 1 << i ? SchemeSel : SchemeNorm]);
+		drw_text(drw, x, 0, w, bh, lrpad / 2, tags[i], urg & 1 << i);
+		x += w;
+	}
+	w = TEXTW(m->ltsymbol);
+	drw_setscheme(drw, scheme[SchemeNorm]);
+	x = drw_text(drw, x, 0, w, bh, lrpad / 2, m->ltsymbol, 0);
 
-    /* Replace window title display with music info */
-    if ((w = m->ww - tw - x) > bh) {
-        // Fetch music info from your script
-        if ((fp = popen("~/.local/bin/statusbar/sb-music", "r"))) {
-            if (fgets(music, sizeof(music), fp) != NULL) {
-                // Trim newline if present
-                music[strcspn(music, "\n")] = 0;
-                drw_setscheme(drw, scheme[m == selmon ? SchemeSel : SchemeNorm]);
-                drw_text(drw, x, 0, w, bh, lrpad / 2, music, 0);
-            }
-            pclose(fp);
-        } else {
-            drw_setscheme(drw, scheme[SchemeNorm]);
-            drw_rect(drw, x, 0, w, bh, 1, 1);
-        }
-    }
-    drw_map(drw, m->barwin, 0, 0, m->ww, bh);
+	/* Fill remaining space to avoid glitches */
+	w = m->ww - tw - x; /* Calculate the remaining width */
+	if (w > 0) {
+		drw_setscheme(drw, scheme[SchemeNorm]);
+		drw_rect(drw, x, 0, w, bh, 1, 1); /* Draw a rectangle to fill the space */
+	}
+
+	drw_map(drw, m->barwin, 0, 0, m->ww, bh);
 }
 
 void
