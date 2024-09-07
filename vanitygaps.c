@@ -49,27 +49,33 @@ void
 toggleborder(const Arg *arg)
 {
     Client *c;
+    Monitor *m;
     unsigned int newbw;
 
-    /* Determine new border width based on current state */
+    /* Determine new border width based on the current state */
     newbw = (selmon->clients && selmon->clients->bw == 0) ? 1 : 0;
 
-    /* Iterate over all clients on the selected monitor */
-    for (c = selmon->clients; c; c = c->next) {
-        if (newbw == 0) {
-            /* Save current border width before disabling */
-            c->oldbw = c->bw;
-        } else if (c->bw == 0) {
-            /* Restore border width if it was previously disabled */
-            c->bw = (c->oldbw > 0) ? c->oldbw : 1;
-        }
+    /* Iterate over all monitors */
+    for (m = mons; m; m = m->next) {
+        /* Iterate over all clients on each monitor */
+        for (c = m->clients; c; c = c->next) {
+            if (newbw == 0) {
+                /* Save current border width before disabling */
+                c->oldbw = c->bw;
+            } else if (c->bw == 0) {
+                /* Restore border width if it was previously disabled */
+                c->bw = (c->oldbw > 0) ? c->oldbw : 1;
+            }
 
-        /* Update border width */
-        c->bw = newbw;
+            /* Update border width */
+            c->bw = newbw;
+        }
     }
 
     /* Apply the changes and force a redraw */
-    arrange(selmon);
+    for (m = mons; m; m = m->next) {
+        arrange(m);
+    }
     XFlush(dpy);
 }
 
