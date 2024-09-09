@@ -12,7 +12,6 @@ static void togglesmartgaps(const Arg *arg);
 static void toggleborder(const Arg *arg);
 
 /* Layouts */
-static void monocle(Monitor *m);
 static void bstack(Monitor *m);
 static void centeredmaster(Monitor *m);
 static void centeredfloatingmaster(Monitor *m);
@@ -44,7 +43,7 @@ setgaps(int oh, int ov, int ih, int iv)
 	arrange(selmon);
 }
 
-/*toggle border*/
+/* toggle border */
 void
 toggleborder(const Arg *arg)
 {
@@ -76,6 +75,10 @@ toggleborder(const Arg *arg)
     for (m = mons; m; m = m->next) {
         arrange(m);
     }
+    
+    /* Activate toggle gaps */
+    togglegaps(NULL);  // Call togglegaps function
+
     XFlush(dpy);
 }
 
@@ -227,21 +230,6 @@ getfacts(Monitor *m, int msize, int ssize, float *mf, float *sf, int *mr, int *s
  * Bottomstack layout + gaps
  * https://dwm.suckless.org/patches/bottomstack/
  */
-
-void
-monocle(Monitor *m)
-{
-	unsigned int n;
-	int oh, ov, ih, iv;
-	Client *c;
-
-	getgaps(m, &oh, &ov, &ih, &iv, &n);
-
-	if (n > 0) /* override layout symbol */
-		snprintf(m->ltsymbol, sizeof m->ltsymbol, "[%d]", n);
-	for (c = nexttiled(m->clients); c; c = nexttiled(c->next))
-		resize(c, m->wx + ov, m->wy + oh, m->ww - 2 * c->bw - 2 * ov, m->wh - 2 * c->bw - 2 * oh, 0);
-}
 
 static void
 bstack(Monitor *m)
