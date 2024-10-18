@@ -54,10 +54,10 @@ static const Rule rules[] = {
 { TERMCLASS,  "bg",         NULL,           1 << 7,    0,          1,          0,         -1 },
 { TERMCLASS,  "spterm",     NULL,           SPTAG(0),  1,          1,          0,         -1 },
 { TERMCLASS,  "spcalc",     NULL,           SPTAG(1),  1,          1,          0,         -1 },
-{ NULL,       NULL,         "ncmpcpp",      0,         1,          0,          0,         -1 },
+{ NULL,       NULL,         "ncmpcpp",      0,         1,          0,          1,         -1 },
 { NULL,       NULL,         "pulsemixer",   0,         1,          0,          0,         -1 },
 { NULL,       NULL,         "bluetui",      0,         1,          0,          0,         -1 },
-{ NULL,       NULL,         "nmtui",        0,         1,          0,          0,         -1 },
+{ NULL,       NULL,         "nmtui",        0,         1,          0,          1,         -1 },
 };
 
 /* layout(s) */
@@ -69,14 +69,14 @@ static const int lockfullscreen = 1; /* 1 will force focus on the fullscreen win
 #include "vanitygaps.c"
 static const Layout layouts[] = {
 	/* symbol     arrange function */
-	{ "[]=",	tile },	                /* Default: Master on left, slaves on right */
+	{ "[M]",	monocle },              /* All windows on top of eachother */
 	{ "TTT",	bstack },               /* Master on top, slaves on bottom */
 
 	{ "[@]",	spiral },               /* Fibonacci spiral */
 	{ "[\\]",	dwindle },              /* Decreasing in size right and leftward */
 
+	{ "[]=",	tile },	                /* Default: Master on left, slaves on right */
 	{ "[D]",	deck },	                /* Master on left, slaves in monocle-like mode on right */
-	{ "[M]",	monocle },              /* All windows on top of eachother */
 
 	{ "|M|",	centeredmaster },               /* Master in middle, slaves on sides */
 	{ ">M>",	centeredfloatingmaster },       /* Same but master floats */
@@ -162,19 +162,19 @@ static const Key keys[] = {
 	{ MODKEY,			XK_q,		killclient,	{0} },
 	{ MODKEY|ShiftMask,		XK_q,		spawn,		SHCMD("sudo systemctl suspend") },
 	{ MODKEY,			XK_w,		spawn,		{.v = (const char*[]){ BROWSER, NULL } } },
-	{ MODKEY|ShiftMask,		XK_w,		spawn,		{.v = (const char*[]){ TERMINAL, "-e", "sudo", "wiki-tui", NULL } } },
+	{ MODKEY|ShiftMask,		XK_w,		spawn,		{.v = (const char*[]){ TERMINAL, "-e", "sudo", "nmtui", NULL } } },
 	{ MODKEY,			XK_e,		spawn,		{.v = (const char*[]){ OBSIDIAN, NULL } } },
 	{ MODKEY|ShiftMask,		XK_e,		spawn,		SHCMD(TERMINAL " -e abook -C ~/.config/abook/abookrc --datafile ~/.config/abook/addressbook") },
-	{ MODKEY,			XK_r,		spawn,		{.v = (const char*[]){ TERMINAL, "-e", "lfub", NULL } } },
+	{ MODKEY,			XK_r,		spawn,		{.v = (const char*[]){ TERMINAL, "-e", "yazi", NULL } } },
 	{ MODKEY|ShiftMask,		XK_r,		spawn,		{.v = (const char*[]){ TERMINAL, "-e", "htop", NULL } } },
-	{ MODKEY,			XK_t,          setlayout,              {.v = &layouts[0]} }, /* tile */
-	{ MODKEY|ShiftMask,		XK_t,          setlayout,              {.v = &layouts[1]} }, /* bstack */
-	{ MODKEY,			XK_y,          setlayout,              {.v = &layouts[2]} }, /* spiral */
-	{ MODKEY|ShiftMask,		XK_y,          setlayout,              {.v = &layouts[3]} }, /* dwindle */
-	{ MODKEY,			XK_u,          setlayout,              {.v = &layouts[4]} }, /* deck */
-	{ MODKEY|ShiftMask,		XK_u,          setlayout,              {.v = &layouts[5]} }, /* monocle */
-	{ MODKEY,			XK_i,          setlayout,              {.v = &layouts[6]} }, /* centeredmaster */
-	{ MODKEY|ShiftMask,		XK_i,          setlayout,              {.v = &layouts[7]} }, /* centeredfloatingmaster */
+	{ MODKEY,			XK_t,          setlayout,              {.v = &layouts[0]} },
+	{ MODKEY|ShiftMask,		XK_t,          setlayout,              {.v = &layouts[1]} },
+	{ MODKEY,			XK_y,          setlayout,              {.v = &layouts[2]} },
+	{ MODKEY|ShiftMask,		XK_y,          setlayout,              {.v = &layouts[3]} },
+	{ MODKEY,			XK_u,          setlayout,              {.v = &layouts[4]} },
+	{ MODKEY|ShiftMask,		XK_u,          setlayout,              {.v = &layouts[5]} },
+	{ MODKEY,			XK_i,          setlayout,              {.v = &layouts[6]} },
+	{ MODKEY|ShiftMask,		XK_i,          setlayout,              {.v = &layouts[7]} },
 	{ MODKEY,			XK_o,		incnmaster,     {.i = +1 } },
 	{ MODKEY|ShiftMask,		XK_o,		incnmaster,     {.i = -1 } },
 	{ MODKEY,			XK_p,			spawn,		{.v = (const char*[]){ "mpc", "toggle", NULL } } },
@@ -210,7 +210,7 @@ static const Key keys[] = {
 	/* { MODKEY|ShiftMask,		XK_z,		spawn,		SHCMD("") }, */
 	{ MODKEY,			XK_x,		incrgaps,	{.i = -3 } },
 	/* { MODKEY|ShiftMask,		XK_x,		spawn,		SHCMD("") }, */
-	{ MODKEY,			XK_c,		spawn,		{.v = (const char*[]){ TERMINAL, "-e", "profanity", NULL } } },
+	{ MODKEY,			XK_c,		spawn,		{.v = (const char*[]){ "ex-macchina", NULL } } },
 	/* { MODKEY|ShiftMask,		XK_c,		spawn,		SHCMD("") }, */
 	/* V is automatically bound above in STACKKEYS */
 	{ MODKEY,		XK_b,		togglebar,	{0} },
@@ -277,7 +277,7 @@ static const Key keys[] = {
 	{ 0, XF86XK_ScreenSaver,	spawn,		SHCMD("slock & xset dpms force off; mpc pause; pauseallmpv") },
 	{ 0, XF86XK_TaskPane,		spawn,		{.v = (const char*[]){ TERMINAL, "-e", "htop", NULL } } },
 	{ 0, XF86XK_Mail,		spawn,		SHCMD(TERMINAL " -e neomutt ; pkill -RTMIN+12 dwmblocks") },
-	{ 0, XF86XK_MyComputer,		spawn,		{.v = (const char*[]){ TERMINAL, "-e",  "lfub",  "/", NULL } } },
+	{ 0, XF86XK_MyComputer,		spawn,		{.v = (const char*[]){ TERMINAL, "-e",  "yazi",  "/", NULL } } },
 	/* { 0, XF86XK_Battery,		spawn,		SHCMD("") }, */
 	{ 0, XF86XK_Launch1,		spawn,		{.v = (const char*[]){ "xset", "dpms", "force", "off", NULL } } },
 	{ 0, XF86XK_TouchpadToggle,	spawn,		SHCMD("(synclient | grep 'TouchpadOff.*1' && synclient TouchpadOff=0) || synclient TouchpadOff=1") },
