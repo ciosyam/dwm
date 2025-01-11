@@ -75,9 +75,6 @@ toggleborder(const Arg *arg)
     for (m = mons; m; m = m->next) {
         arrange(m);
     }
-    
-    /* Activate toggle gaps */
-    togglegaps(NULL);  // Call togglegaps function
 
     XFlush(dpy);
 }
