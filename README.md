@@ -9,4 +9,3 @@ git clone https://github.com/ciosyam/dwm.git
 cd dwm
 sudo make install
 ```
-
