@@ -57,6 +57,7 @@ static const Rule rules[] = {
 { NULL,       NULL,         "ncmpcpp",      0,         1,          0,          1,         -1 },
 { NULL,       NULL,         "pulsemixer",   0,         1,          0,          0,         -1 },
 { NULL,       NULL,         "bluetui",      0,         1,          0,          0,         -1 },
+{ NULL,       NULL,         "refresh",      0,         1,          0,          0,         -1 },
 { NULL,       NULL,         "nmtui",        0,         1,          0,          1,         -1 },
 };
 
@@ -158,7 +159,7 @@ static const Key keys[] = {
 	{ MODKEY,			XK_q,		killclient,	{0} },
 	{ MODKEY|ShiftMask,		XK_q,		spawn,		SHCMD("sudo systemctl suspend") },
 	{ MODKEY,			XK_w,		spawn,		{.v = (const char*[]){ BROWSER, NULL } } },
-	{ MODKEY|ShiftMask,		XK_w,		spawn,		{.v = (const char*[]){ TERMINAL, "-e", "sudo", "nmtui", NULL } } },
+	{ MODKEY|ShiftMask,		XK_w,		spawn,		SHCMD(TERMINAL " -e nmtui") },
 	{ MODKEY,			XK_e,		spawn,		{.v = (const char*[]){ OBSIDIAN, NULL } } },
 	{ MODKEY|ShiftMask,		XK_e,		spawn,		SHCMD(TERMINAL " -e abook -C ~/.config/abook/abookrc --datafile ~/.config/abook/addressbook") },
 	{ MODKEY,			XK_r,		spawn,		{.v = (const char*[]){"yeay"} } },
@@ -207,7 +208,7 @@ static const Key keys[] = {
 	{ MODKEY,			XK_x,		incrgaps,	{.i = -3 } },
 	/* { MODKEY|ShiftMask,		XK_x,		spawn,		SHCMD("") }, */
 	{ MODKEY,			XK_c,		spawn,		{.v = (const char*[]){ "ex-macchina", NULL } } },
-	 { MODKEY|ShiftMask,		XK_c,		spawn,		{.v = (const char*[]){ "synth", NULL } } }, 
+	 { MODKEY|ShiftMask,		XK_c,		spawn,		SHCMD(TERMINAL " -e synth") }, 
 	/* V is automatically bound above in STACKKEYS */
 	{ MODKEY,		XK_b,		togglebar,	{0} },
 	{ MODKEY|ShiftMask,		XK_b,		toggleborder,	{0} },
@@ -236,13 +237,13 @@ static const Key keys[] = {
 	{ MODKEY,			XK_F3,		spawn,		{.v = (const char*[]){ "volume_up", NULL } } },
 	{ MODKEY,			XK_F4,		spawn,		SHCMD(TERMINAL " -e pulsemixer; kill -44 $(pidof dwmblocks)") },
 	{ MODKEY,			XK_F5,		spawn,	  SHCMD(TERMINAL " -e bluetui") },
-	{ MODKEY,			XK_F6,		spawn,		{.v = (const char*[]){ "displayselect", NULL } } },
-	{ MODKEY,			XK_F7,		spawn,		{.v = (const char*[]){ "td-toggle", NULL } } },
+	/*{ MODKEY,			XK_F6,		spawn,		{.v = (const char*[]){ "displayselect", NULL } } },*/
+	{ MODKEY,			XK_F7,		spawn,		{.v = (const char*[]){ "sync-brain", NULL } } },
 	{ MODKEY,			XK_F8,		spawn,		{.v = (const char*[]){ "internet-toggle", NULL } } },
-	{ MODKEY,			XK_F9,		spawn,		{.v = (const char*[]){ "sync-brain", NULL } } },
-	{ MODKEY,			XK_F10,		spawn,		{.v = (const char*[]){ "mounter", NULL } } },
-	{ MODKEY,			XK_F11,		spawn,		{.v = (const char*[]){ "dualmon", NULL } } },
-	{ MODKEY,			XK_F12,		spawn,		SHCMD("remapd") },
+	{ MODKEY,			XK_F9,		spawn,		SHCMD(TERMINAL " -e refresh") },
+	{ MODKEY,			XK_F10,		spawn,		SHCMD("remapd") },
+	{ MODKEY,			XK_F11,		spawn,		{.v = (const char*[]){ "displayselect", NULL } } },
+	{ MODKEY,			XK_F12,		spawn,		{.v = (const char*[]){ "dualmon", NULL } } },
 	{ MODKEY,			XK_space,	zoom,		{0} },
 	{ MODKEY|ShiftMask,		XK_space,	togglefloating,	{0} },
 
