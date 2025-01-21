@@ -54,11 +54,12 @@ static const Rule rules[] = {
 { TERMCLASS,  "bg",         NULL,           1 << 7,    0,          1,          0,         -1 },
 { TERMCLASS,  "spterm",     NULL,           SPTAG(0),  1,          1,          0,         -1 },
 { TERMCLASS,  "spcalc",     NULL,           SPTAG(1),  1,          1,          0,         -1 },
-{ NULL,       NULL,         "ncmpcpp",      0,         1,          0,          1,         -1 },
-{ NULL,       NULL,         "pulsemixer",   0,         1,          0,          0,         -1 },
+{ NULL,       NULL,         "ncmpcpp",      0,         1,          1,          1,         -1 },
+{ NULL,       NULL,         "pulsemixer",   0,         1,          1,          0,         -1 },
 { NULL,       NULL,         "bluetui",      0,         1,          0,          0,         -1 },
-{ NULL,       NULL,         "refresh",      0,         1,          0,          0,         -1 },
+{ NULL,       NULL,         "refresh",      0,         1,          1,          0,         -1 },
 { NULL,       NULL,         "nmtui",        0,         1,          0,          1,         -1 },
+{ NULL,       NULL,         "synth",        0,         1,          1,          0,         -1 },
 };
 
 /* layout(s) */
@@ -208,7 +209,7 @@ static const Key keys[] = {
 	{ MODKEY,			XK_x,		incrgaps,	{.i = -3 } },
 	/* { MODKEY|ShiftMask,		XK_x,		spawn,		SHCMD("") }, */
 	{ MODKEY,			XK_c,		spawn,		{.v = (const char*[]){ "ex-macchina", NULL } } },
-	 { MODKEY|ShiftMask,		XK_c,		spawn,		SHCMD(TERMINAL " -e synth") }, 
+	 { MODKEY|ShiftMask,		XK_c,		spawn,		SHCMD(TERMINAL "synth") }, 
 	/* V is automatically bound above in STACKKEYS */
 	{ MODKEY,		XK_b,		togglebar,	{0} },
 	{ MODKEY|ShiftMask,		XK_b,		toggleborder,	{0} },
