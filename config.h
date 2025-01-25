@@ -54,7 +54,6 @@ static const Rule rules[] = {
 { TERMCLASS,  "bg",         NULL,           1 << 7,    0,          1,          0,         -1 },
 { TERMCLASS,  "spterm",     NULL,           SPTAG(0),  1,          1,          0,         -1 },
 { TERMCLASS,  "spcalc",     NULL,           SPTAG(1),  1,          1,          0,         -1 },
-{ NULL,       NULL,         "ncmpcpp",      0,         1,          1,          1,         -1 },
 { NULL,       NULL,         "pulsemixer",   0,         1,          1,          0,         -1 },
 { NULL,       NULL,         "bluetui",      0,         1,          0,          0,         -1 },
 { NULL,       NULL,         "refresh",      0,         1,          1,          0,         -1 },
@@ -209,7 +208,7 @@ static const Key keys[] = {
 	{ MODKEY,			XK_x,		incrgaps,	{.i = -3 } },
 	/* { MODKEY|ShiftMask,		XK_x,		spawn,		SHCMD("") }, */
 	{ MODKEY,			XK_c,		spawn,		{.v = (const char*[]){ "ex-macchina", NULL } } },
-	 { MODKEY|ShiftMask,		XK_c,		spawn,		SHCMD(TERMINAL "synth") }, 
+	{ MODKEY|ShiftMask,		XK_c,		spawn,		{.v = (const char*[]){ "synth", NULL } } },
 	/* V is automatically bound above in STACKKEYS */
 	{ MODKEY,		XK_b,		togglebar,	{0} },
 	{ MODKEY|ShiftMask,		XK_b,		toggleborder,	{0} },
@@ -238,12 +237,11 @@ static const Key keys[] = {
 	{ MODKEY,			XK_F3,		spawn,		{.v = (const char*[]){ "volume_up", NULL } } },
 	{ MODKEY,			XK_F4,		spawn,		SHCMD(TERMINAL " -e pulsemixer; kill -44 $(pidof dwmblocks)") },
 	{ MODKEY,			XK_F5,		spawn,	  SHCMD(TERMINAL " -e bluetui") },
-	/*{ MODKEY,			XK_F6,		spawn,		{.v = (const char*[]){ "displayselect", NULL } } },*/
-	{ MODKEY,			XK_F7,		spawn,		{.v = (const char*[]){ "sync-brain", NULL } } },
+	{ MODKEY,			XK_F7,		spawn,		{.v = (const char*[]){ "brain-sync", NULL } } },
 	{ MODKEY,			XK_F8,		spawn,		{.v = (const char*[]){ "internet-toggle", NULL } } },
 	{ MODKEY,			XK_F9,		spawn,		SHCMD(TERMINAL " -e refresh") },
 	{ MODKEY,			XK_F10,		spawn,		SHCMD("remapd") },
-	{ MODKEY,			XK_F11,		spawn,		{.v = (const char*[]){ "displayselect", NULL } } },
+	{ MODKEY,			XK_F11,		spawn,		{.v = (const char*[]){ "tlps", NULL } } },
 	{ MODKEY,			XK_F12,		spawn,		{.v = (const char*[]){ "dualmon", NULL } } },
 	{ MODKEY,			XK_space,	zoom,		{0} },
 	{ MODKEY|ShiftMask,		XK_space,	togglefloating,	{0} },
@@ -256,8 +254,8 @@ static const Key keys[] = {
 	{ MODKEY,			XK_Scroll_Lock,	spawn,		SHCMD("killall screenkey || screenkey &") },
 
 	{ 0, XF86XK_AudioMute,		spawn,		SHCMD("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle; kill -44 $(pidof dwmblocks)") },
-	{ 0, XF86XK_AudioRaiseVolume,	spawn,		{.v = (const char*[]){ "volume_up+1", NULL } } },
-	{ 0, XF86XK_AudioLowerVolume,	spawn,		{.v = (const char*[]){ "volume_down-1", NULL } } },
+	{ 0, XF86XK_AudioRaiseVolume,	spawn,		{.v = (const char*[]){ "volume_upp", NULL } } },
+	{ 0, XF86XK_AudioLowerVolume,	spawn,		{.v = (const char*[]){ "volume_downn", NULL } } },
 	{ 0, XF86XK_AudioPrev,		spawn,		{.v = (const char*[]){ "mpc", "prev", NULL } } },
 	{ 0, XF86XK_AudioNext,		spawn,		{.v = (const char*[]){ "mpc",  "next", NULL } } },
 	{ 0, XF86XK_AudioPause,		spawn,		{.v = (const char*[]){ "mpc", "pause", NULL } } },
