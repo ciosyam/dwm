@@ -479,9 +479,24 @@ setlayout(const Arg *arg)
 void
 arrangemon(Monitor *m)
 {
+	int n = 0;
+	Client *c;
 	strncpy(m->ltsymbol, m->lt[m->sellt]->symbol, sizeof m->ltsymbol);
-	if (m->lt[m->sellt]->arrange)
-		m->lt[m->sellt]->arrange(m);
+	for (n = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next), n++);
+	if ((m->lt[m->sellt]->arrange != monocle && n > 1) || !m->lt[m->sellt]->arrange) {
+		for (c = m->clients; c; c = c->next) {
+			if (ISVISIBLE(c) && (!m->lt[m->sellt]->arrange || !c->isfloating) && (c->bw != borderpx)) {
+				c->oldbw = c->bw;
+				c->bw = borderpx;
+				resizeclient(c, m->wx, m->wy, m->ww - (2 * c->bw), m->wh - (2 * c->bw));
+			}
+		}
+		if (m->lt[m->sellt]->arrange) {
+			m->lt[m->sellt]->arrange(m);
+		}
+	} else {
+		monocle(m);
+	}
 }
 
 void
@@ -1531,6 +1546,13 @@ resizeclient(Client *c, int x, int y, int w, int h)
 	c->oldw = c->w; c->w = wc.width = w;
 	c->oldh = c->h; c->h = wc.height = h;
 	wc.border_width = c->bw;
+	if (((nexttiled(c->mon->clients) == c && !nexttiled(c->next))
+	    || &monocle == c->mon->lt[c->mon->sellt]->arrange)
+	    && !c->isfullscreen && !c->isfloating) {
+		c->w = wc.width += c->bw * 2;
+		c->h = wc.height += c->bw * 2;
+		wc.border_width = 0;
+	}
 	XConfigureWindow(dpy, c->win, CWX|CWY|CWWidth|CWHeight|CWBorderWidth, &wc);
 	configure(c);
 	XSync(dpy, False);

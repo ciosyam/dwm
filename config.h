@@ -7,7 +7,7 @@
 #define OBSIDIAN "obsidian"
 
 /* appearance */
-static unsigned int borderpx  = 0;        /* border pixel of windows */
+static unsigned int borderpx  = 1;        /* border pixel of windows */
 static unsigned int snap      = 32;       /* snap pixel */
 static unsigned int gappih    = 10;       /* horiz inner gap between windows */
 static unsigned int gappiv    = 5;       /* vert inner gap between windows */
@@ -212,7 +212,6 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,		XK_c,		spawn,		{.v = (const char*[]){ TERMINAL, "-f", "monospace:size=13", "-g", "80x24", "-e", "synth", NULL }} },
 	/* V is automatically bound above in STACKKEYS */
 	{ MODKEY,		XK_b,		togglebar,	{0} },
-	{ MODKEY|ShiftMask,		XK_b,		toggleborder,	{0} },
 	{ MODKEY, XK_n, spawn, {.v = (const char*[]){ TERMINAL, "-e", "sh", "-c", "cd /home/tetr/brain.exe/ && nvim", NULL } } },
 	{ MODKEY|ShiftMask,		XK_n,		spawn,		SHCMD(TERMINAL " -e newsboat ; pkill -RTMIN+6 dwmblocks") },
 	{ MODKEY,			XK_m,		spawn,		{.v = (const char*[]){ TERMINAL, "-f", "monospace:size=13", "-g", "80x24", "-e", "ncmpcpp", NULL }} },
