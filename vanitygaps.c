@@ -1,8 +1,6 @@
 /* Key binding functions */
-static void defaultgaps(const Arg *arg);
 static void incrgaps(const Arg *arg);
 static void togglegaps(const Arg *arg);
-static void togglesmartgaps(const Arg *arg);
 
 /* Layouts */
 static void bstack(Monitor *m);
@@ -41,19 +39,6 @@ togglegaps(const Arg *arg)
 {
 	enablegaps = !enablegaps;
 	arrange(NULL);
-}
-
-static void
-togglesmartgaps(const Arg *arg)
-{
-	smartgaps = !smartgaps;
-	arrange(NULL);
-}
-
-static void
-defaultgaps(const Arg *arg)
-{
-	setgaps(gappoh, gappov, gappih, gappiv);
 }
 
 static void
