@@ -47,7 +47,7 @@ static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 
 static const Rule rules[] = {
 /* class      instance      title          tags mask   isfloating  isterminal  noswallow  monitor */
-{ "Gimp",     NULL,         NULL,           1 << 8,    0,          0,          0,         -1 },
+/*{ "Gimp",     NULL,         NULL,           1 << 8,    0,          0,          0,         -1 },*/
 { TERMCLASS,  NULL,         NULL,           0,         0,          1,          0,         -1 },
 { NULL,       NULL,         "Event Tester", 0,         0,          0,          1,         -1 },
 { TERMCLASS,  "floatterm",  NULL,           0,         1,          1,          0,         -1 },
@@ -57,8 +57,9 @@ static const Rule rules[] = {
 { NULL,       NULL,         "pulsemixer",   0,         1,          1,          0,         -1 },
 { NULL,       NULL,         "bluetui",      0,         1,          0,          0,         -1 },
 { NULL,       NULL,         "refresh",      0,         1,          1,          0,         -1 },
-{ NULL,       NULL,         "nmtui",        0,         1,          0,          1,         -1 },
-{ NULL,       NULL,         "synth",        0,         1,          1,          0,         -1 },
+{ NULL,       NULL,         "nmtui",        0,         1,          1,          1,         -1 },
+{ NULL,       NULL,         "synth",        0,         1,          1,          1,         -1 },
+{ NULL,       NULL,         "ncmpcpp",      0,         1,          1,          1,         -1 },
 };
 
 /* layout(s) */
@@ -159,7 +160,7 @@ static const Key keys[] = {
 	{ MODKEY,			XK_q,		killclient,	{0} },
 	{ MODKEY|ShiftMask,		XK_q,		spawn,		SHCMD("sudo systemctl suspend") },
 	{ MODKEY,			XK_w,		spawn,		{.v = (const char*[]){ BROWSER, NULL } } },
-	{ MODKEY|ShiftMask,		XK_w,		spawn,		SHCMD(TERMINAL " -e nmtui") },
+	{ MODKEY|ShiftMask,		XK_w,		spawn,		{.v = (const char*[]){ TERMINAL, "-f", "monospace:size=13", "-g", "80x24", "-e", "nmtui", NULL }} },
 	{ MODKEY,			XK_e,		spawn,		{.v = (const char*[]){ OBSIDIAN, NULL } } },
 	{ MODKEY|ShiftMask,		XK_e,		spawn,		SHCMD(TERMINAL " -e abook -C ~/.config/abook/abookrc --datafile ~/.config/abook/addressbook") },
 	{ MODKEY,			XK_r,		spawn,		{.v = (const char*[]){"yeay"} } },
@@ -208,13 +209,13 @@ static const Key keys[] = {
 	{ MODKEY,			XK_x,		incrgaps,	{.i = -3 } },
 	/* { MODKEY|ShiftMask,		XK_x,		spawn,		SHCMD("") }, */
 	{ MODKEY,			XK_c,		spawn,		{.v = (const char*[]){ "ex-macchina", NULL } } },
-	{ MODKEY|ShiftMask,		XK_c,		spawn,		{.v = (const char*[]){ "synth", NULL } } },
+	{ MODKEY|ShiftMask,		XK_c,		spawn,		{.v = (const char*[]){ TERMINAL, "-f", "monospace:size=13", "-g", "80x24", "-e", "synth", NULL }} },
 	/* V is automatically bound above in STACKKEYS */
 	{ MODKEY,		XK_b,		togglebar,	{0} },
 	{ MODKEY|ShiftMask,		XK_b,		toggleborder,	{0} },
 	{ MODKEY, XK_n, spawn, {.v = (const char*[]){ TERMINAL, "-e", "sh", "-c", "cd /home/tetr/brain.exe/ && nvim", NULL } } },
 	{ MODKEY|ShiftMask,		XK_n,		spawn,		SHCMD(TERMINAL " -e newsboat ; pkill -RTMIN+6 dwmblocks") },
-	{ MODKEY,			XK_m,		spawn,		{.v = (const char*[]){ TERMINAL, "-e", "ncmpcpp", NULL } } },
+	{ MODKEY,			XK_m,		spawn,		{.v = (const char*[]){ TERMINAL, "-f", "monospace:size=13", "-g", "80x24", "-e", "ncmpcpp", NULL }} },
 	{ MODKEY|ShiftMask,		XK_m,		spawn,		SHCMD("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle; kill -44 $(pidof dwmblocks)") },
 	{ MODKEY,			XK_comma,	spawn,		{.v = (const char*[]){ "mpc", "prev", NULL } } },
 	{ MODKEY|ShiftMask,		XK_comma,	spawn,		{.v = (const char*[]){ "mpc", "seek", "0%", NULL } } },
@@ -239,7 +240,7 @@ static const Key keys[] = {
 	{ MODKEY,			XK_F5,		spawn,	  SHCMD(TERMINAL " -e bluetui") },
 	{ MODKEY,			XK_F7,		spawn,		{.v = (const char*[]){ "brain-sync", NULL } } },
 	{ MODKEY,			XK_F8,		spawn,		{.v = (const char*[]){ "internet-toggle", NULL } } },
-	{ MODKEY,			XK_F9,		spawn,		SHCMD(TERMINAL " -e refresh") },
+	{ MODKEY,			XK_F9,		spawn,		{.v = (const char*[]){ TERMINAL, "-f", "monospace:size=13", "-g", "80x24", "-e", "refresh", NULL }} },
 	{ MODKEY,			XK_F10,		spawn,		SHCMD("remapd") },
 	{ MODKEY,			XK_F11,		spawn,		{.v = (const char*[]){ "tlps", NULL } } },
 	{ MODKEY,			XK_F12,		spawn,		{.v = (const char*[]){ "dualmon", NULL } } },
