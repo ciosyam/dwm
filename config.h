@@ -71,17 +71,17 @@ static const int lockfullscreen = 1; /* 1 will force focus on the fullscreen win
 #include "vanitygaps.c"
 static const Layout layouts[] = {
 	/* symbol     arrange function */
-	{ "[M]",	monocle },              /* All windows on top of eachother */
+	{ ">M>",	centeredfloatingmaster },       /* Same but master floats */
 	{ "[@]",	spiral },               /* Fibonacci spiral */
 
-	{ "TTT",	bstack },               /* Master on top, slaves on bottom */
+	{ "[M]",	monocle },              /* All windows on top of eachother */
 	{ "[\\]",	dwindle },              /* Decreasing in size right and leftward */
 
 	{ "[]=",	tile },	                /* Default: Master on left, slaves on right */
 	{ "[D]",	deck },	                /* Master on left, slaves in monocle-like mode on right */
 
-	{ "|M|",	centeredmaster },               /* Master in middle, slaves on sides */
-	{ ">M>",	centeredfloatingmaster },       /* Same but master floats */
+	{ "|M|",	centeredmaster },       /* Master in middle, slaves on sides */
+	{ "TTT",	bstack },               /* Master on top, slaves on bottom */
 
 	{ "><>",	NULL },	                /* no layout function means floating behavior */
 	{ NULL,		NULL },
