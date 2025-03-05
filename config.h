@@ -183,21 +183,21 @@ static const Key keys[] = {
 	{ MODKEY,			XK_backslash,		view,		{0} },
 	/* { MODKEY|ShiftMask,		XK_backslash,		spawn,		SHCMD("") }, */
 
-	{ MODKEY,			XK_a,		togglegaps,	{0} },
-  { MODKEY|ShiftMask,		XK_a,       spawn,		{.v = termcmd } },
+	{ MODKEY,			        XK_a,	    	togglegaps,	{0} },
+  { MODKEY|ShiftMask,		XK_a,       togglebar,	{0} },
 	{ MODKEY,			XK_s,		togglesticky,	{0} },
 	/* { MODKEY|ShiftMask,		XK_s,		spawn,		SHCMD("") }, */
 	{ MODKEY,			XK_d,		spawn,          {.v = (const char*[]){ "dmenu_run", NULL } } },
 	{ MODKEY|ShiftMask,		XK_d,		spawn,		{.v = (const char*[]){ "passmenu", NULL } } },
 	{ MODKEY,			XK_f,		togglefullscr,	{0} },
 	{ MODKEY|ShiftMask,		XK_f,		setlayout,	{.v = &layouts[8]} },
-	{ MODKEY,		  XK_g,		shifttag,	{ .i = -1 } },
- 	{ MODKEY,			XK_semicolon,	shifttag,	{ .i = +1 } },
-	{ MODKEY,			XK_h,		setmfact,	{.f = -0.05} },
-  { MODKEY|ShiftMask,			XK_h,		shiftview,	{ .i = -1 } },
-  { MODKEY|ShiftMask,			XK_l,		shiftview,	{ .i = +1 } },
+	{ MODKEY,         		  XK_g,		      shifttag, 	{ .i = -1 } },
+ 	{ MODKEY,		          	XK_semicolon,	shifttag, 	{ .i = +1 } },
+	{ MODKEY,	          		XK_h,	       	setmfact, 	{.f = -0.05} },
+	{ MODKEY,			          XK_l,		      setmfact, 	{.f = +0.05} },
+  { MODKEY|ShiftMask,			XK_h,	      	shiftview,	{ .i = -1 } },
+  { MODKEY|ShiftMask,			XK_l,		      shiftview,	{ .i = +1 } },
 	/* J and K are automatically bound above in STACKEYS */
-	{ MODKEY,			XK_l,		setmfact,      	{.f = +0.05} },
 	{ MODKEY,			XK_Return,	spawn,		{.v = termcmd } },
 	{ MODKEY|ShiftMask,		XK_Return,	togglescratch,	{.ui = 0} },
 
@@ -208,9 +208,9 @@ static const Key keys[] = {
 	{ MODKEY,			XK_c,		spawn,		{.v = (const char*[]){ "ex-macchina", NULL } } },
 	{ MODKEY|ShiftMask,		XK_c,		spawn,		{.v = (const char*[]){ TERMINAL, "-f", "monospace:size=13", "-g", "80x24", "-e", "synth", NULL }} },
 	/* V is automatically bound above in STACKKEYS */
-	{ MODKEY,		XK_b,		togglebar,	{0} },
-	{ MODKEY, XK_n, spawn, {.v = (const char*[]){ TERMINAL, "-e", "sh", "-c", "cd /home/tetr/brain.exe/ && nvim", NULL } } },
+	/*{ MODKEY,		XK_b,		togglebar,	{0} },*/
 	{ MODKEY|ShiftMask,		XK_b,		spawn,		SHCMD(TERMINAL " -e newsboat ; pkill -RTMIN+6 dwmblocks") },
+	{ MODKEY, XK_n, spawn, {.v = (const char*[]){ TERMINAL, "-e", "sh", "-c", "cd /home/tetr/brain.exe/ && nvim", NULL } } },
 	{ MODKEY,			XK_m,		spawn,		{.v = (const char*[]){ TERMINAL, "-f", "monospace:size=15.5", "-g", "60x18", "-e", "ncmpcpp", NULL }} },
 	{ MODKEY|ShiftMask,		XK_m,		spawn,		SHCMD("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle; kill -44 $(pidof dwmblocks)") },
 	{ MODKEY,			XK_comma,	spawn,		{.v = (const char*[]){ "mpc", "prev", NULL } } },
@@ -218,8 +218,8 @@ static const Key keys[] = {
 	{ MODKEY,			XK_period,	spawn,		{.v = (const char*[]){ "mpc", "next", NULL } } },
 	{ MODKEY|ShiftMask,		XK_period,	spawn,		{.v = (const char*[]){ "mpc", "repeat", NULL } } },
 
-	{ MODKEY|ShiftMask,			XK_j,	focusmon,	{.i = -1 } },
-	{ MODKEY|ShiftMask,			XK_k,	focusmon,	{.i = +1 } },
+	{ MODKEY|ShiftMask,		XK_j,	focusmon,	{.i = -1 } },
+	{ MODKEY|ShiftMask,		XK_k,	focusmon,	{.i = +1 } },
 	{ MODKEY|ShiftMask,		XK_h,	tagmon,		{.i = -1 } },
 	{ MODKEY|ShiftMask,		XK_l,	tagmon,		{.i = +1 } },
 
@@ -233,13 +233,13 @@ static const Key keys[] = {
 	{ MODKEY,			XK_F2,		spawn,		{.v = (const char*[]){ "volume_down", NULL } } },
 	{ MODKEY,			XK_F3,		spawn,		{.v = (const char*[]){ "volume_up", NULL } } },
 	{ MODKEY,			XK_F4,		spawn,		{.v = (const char*[]){ TERMINAL, "-f", "monospace:size=14.5", "-g", "75x20", "-e", "pulsemixer", NULL }} },
-	{ MODKEY,			XK_F5,		spawn,	  {.v = (const char*[]){ TERMINAL, "-f", "monospace:size=15.5", "-g", "60x18", "-e", "bluetui", NULL }} },
+	{ MODKEY,			XK_F5,		spawn,	  {.v = (const char*[]){ "redshift-toggle", NULL } } },
 	{ MODKEY,			XK_F7,		spawn,		{.v = (const char*[]){ "brain-sync", NULL } } },
 	{ MODKEY,			XK_F8,		spawn,		{.v = (const char*[]){ "internet-toggle", NULL } } },
 	{ MODKEY,			XK_F9,		spawn,		{.v = (const char*[]){ TERMINAL, "-f", "monospace:size=13", "-g", "80x24", "-e", "refresh", NULL }} },
 	{ MODKEY,			XK_F10,		spawn,		SHCMD("remapd") },
 	{ MODKEY,			XK_F11,		spawn,		{.v = (const char*[]){ "tlps", NULL } } },
-	{ MODKEY,			XK_F12,		spawn,		{.v = (const char*[]){ "dualmon", NULL } } },
+	{ MODKEY,			XK_F12,		spawn,		{.v = (const char*[]){ TERMINAL, "-f", "monospace:size=15.5", "-g", "60x18", "-e", "bluetui", NULL }} },
 	{ MODKEY,			XK_space,	zoom,		{0} },
 	{ MODKEY|ShiftMask,		XK_space,	togglefloating,	{0} },
 
@@ -278,21 +278,6 @@ static const Key keys[] = {
 	{ 0, XF86XK_TouchpadOn,		spawn,		{.v = (const char*[]){ "synclient", "TouchpadOff=0", NULL } } },
 	{ 0, XF86XK_MonBrightnessUp,	spawn,		{.v = (const char*[]){ "xbacklight", "-inc", "15", NULL } } },
 	{ 0, XF86XK_MonBrightnessDown,	spawn,		{.v = (const char*[]){ "xbacklight", "-dec", "15", NULL } } },
-
-	/* { MODKEY|Mod4Mask,              XK_h,      incrgaps,       {.i = +1 } }, */
-	/* { MODKEY|Mod4Mask,              XK_l,      incrgaps,       {.i = -1 } }, */
-	/* { MODKEY|Mod4Mask|ShiftMask,    XK_h,      incrogaps,      {.i = +1 } }, */
-	/* { MODKEY|Mod4Mask|ShiftMask,    XK_l,      incrogaps,      {.i = -1 } }, */
-	/* { MODKEY|Mod4Mask|ControlMask,  XK_h,      incrigaps,      {.i = +1 } }, */
-	/* { MODKEY|Mod4Mask|ControlMask,  XK_l,      incrigaps,      {.i = -1 } }, */
-	/* { MODKEY,                       XK_y,      incrihgaps,     {.i = +1 } }, */
-	/* { MODKEY,                       XK_o,      incrihgaps,     {.i = -1 } }, */
-	/* { MODKEY|ControlMask,           XK_y,      incrivgaps,     {.i = +1 } }, */
-	/* { MODKEY|ControlMask,           XK_o,      incrivgaps,     {.i = -1 } }, */
-	/* { MODKEY|Mod4Mask,              XK_y,      incrohgaps,     {.i = +1 } }, */
-	/* { MODKEY|Mod4Mask,              XK_o,      incrohgaps,     {.i = -1 } }, */
-	/* { MODKEY|ShiftMask,             XK_y,      incrovgaps,     {.i = +1 } }, */
-	/* { MODKEY|ShiftMask,             XK_o,      incrovgaps,     {.i = -1 } }, */
 
 };
 
