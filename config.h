@@ -51,7 +51,7 @@ static const Rule rules[] = {
 { TERMCLASS,  "floatterm",  NULL,           0,         1,          1,          0,         -1 },
 { TERMCLASS,  "bg",         NULL,           1 << 7,    0,          1,          0,         -1 },
 { TERMCLASS,  "spterm",     NULL,           SPTAG(0),  1,          1,          0,         -1 },
-{ TERMCLASS,  "floatyeay",  NULL,           0,         1,          1,          0,         -1 },
+/*{ TERMCLASS,  "floatyeay",  NULL,           0,         1,          1,          0,         -1 },*/
 { NULL,       NULL,         "pulsemixer",   0,         1,          1,          0,         -1 },
 { NULL,       NULL,         "bluetui",      0,         1,          0,          0,         -1 },
 { NULL,       NULL,         "refresh",      0,         1,          1,          0,         -1 },
