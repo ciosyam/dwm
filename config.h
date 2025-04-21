@@ -5,6 +5,7 @@
 #define TERMCLASS "St"
 #define BROWSER "thorium-browser"
 #define OBSIDIAN "obsidian"
+#define BITWIG "bitwig-studio"
 
 /* appearance */
 static unsigned int borderpx  = 1;        /* border pixel of windows */
@@ -156,7 +157,7 @@ static const Key keys[] = {
 	{ MODKEY,			XK_BackSpace,	spawn,		{.v = (const char*[]){ "sysact", NULL } } },
 	{ MODKEY,			XK_Tab,		view,		{0} },
 	/* { MODKEY|ShiftMask,		XK_Tab,		spawn,		SHCMD("") }, */
-	{ MODKEY,			XK_q,		killclient,	{0} },
+	{ MODKEY,			        XK_q,		killclient,	{0} },
 	{ MODKEY|ShiftMask,		XK_q,		spawn,		SHCMD("sudo systemctl suspend") },
 	{ MODKEY|ShiftMask, 	XK_w,		spawn,		{.v = (const char*[]){ BROWSER, NULL } } },
 	{ MODKEY,		          XK_w,		spawn,		{.v = (const char*[]){ TERMINAL, "-f", "monospace:size=16", "-g", "80x24", "-e", "wiki-tui", NULL }} },
@@ -185,11 +186,11 @@ static const Key keys[] = {
 
 	{ MODKEY,			        XK_a,	    	togglegaps,	{0} },
   { MODKEY|ShiftMask,		XK_a,       togglebar,	{0} },
-	{ MODKEY,			XK_s,		togglesticky,	{0} },
+	{ MODKEY,	        		XK_s,		togglesticky,	{0} },
 	/* { MODKEY|ShiftMask,		XK_s,		spawn,		SHCMD("") }, */
-	{ MODKEY,			XK_d,		spawn,          {.v = (const char*[]){ "dmenu_run", NULL } } },
+	{ MODKEY,	        		XK_d,		spawn,    {.v = (const char*[]){ "dmenu_run", NULL } } },
 	{ MODKEY|ShiftMask,		XK_d,		spawn,		{.v = (const char*[]){ "passmenu", NULL } } },
-	{ MODKEY,			XK_f,		togglefullscr,	{0} },
+	{ MODKEY,			        XK_f,		togglefullscr,	{0} },
 	{ MODKEY|ShiftMask,		XK_f,		setlayout,	{.v = &layouts[8]} },
 	{ MODKEY,         		  XK_g,		      shifttag, 	{ .i = -1 } },
  	{ MODKEY,		          	XK_semicolon,	shifttag, 	{ .i = +1 } },
@@ -205,11 +206,11 @@ static const Key keys[] = {
 	/* { MODKEY|ShiftMask,		XK_z,		spawn,		SHCMD("") }, */
 	{ MODKEY,			XK_x,		incrgaps,	{.i = -3 } },
 	/* { MODKEY|ShiftMask,		XK_x,		spawn,		SHCMD("") }, */
-	{ MODKEY,			XK_c,		spawn,		{.v = (const char*[]){ "ex-macchina", NULL } } },
+	{ MODKEY,	        		XK_c,		spawn,		{.v = (const char*[]){ "ex-macchina", NULL } } },
 	{ MODKEY|ShiftMask,		XK_c,		spawn,		{.v = (const char*[]){ TERMINAL, "-f", "monospace:size=13", "-g", "80x24", "-e", "synth", NULL }} },
 	/* V is automatically bound above in STACKKEYS */
-	/*{ MODKEY,		XK_b,		togglebar,	{0} },*/
-	{ MODKEY|ShiftMask,		XK_b,		spawn,		SHCMD(TERMINAL " -e newsboat ; pkill -RTMIN+6 dwmblocks") },
+	{ MODKEY,		          XK_b,		spawn,		SHCMD(TERMINAL " -e newsboat ; pkill -RTMIN+6 dwmblocks") },
+	{ MODKEY|ShiftMask,		XK_b,		spawn,		{.v = (const char*[]){ BITWIG, NULL } } },
 	{ MODKEY, XK_n, spawn, {.v = (const char*[]){ TERMINAL, "-e", "sh", "-c", "cd /home/tetr/brain.exe/ && nvim", NULL } } },
 	{ MODKEY,			XK_m,		spawn,		{.v = (const char*[]){ TERMINAL, "-f", "monospace:size=15.5", "-g", "60x18", "-e", "ncmpcpp", NULL }} },
 	{ MODKEY|ShiftMask,		XK_m,		spawn,		SHCMD("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle; kill -44 $(pidof dwmblocks)") },
