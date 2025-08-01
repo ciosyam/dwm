@@ -58,7 +58,7 @@ static const Rule rules[] = {
 { NULL,       NULL,         "refresh",      0,         1,          1,          0,         -1 },
 { NULL,       NULL,         "nmtui",        0,         1,          1,          1,         -1 },
 { NULL,       NULL,         "synth",        0,         1,          1,          1,         -1 },
-{ NULL,       NULL,         "rmpc",      0,         1,          1,          1,         -1 },
+{ NULL,       NULL,         "rmpc",         0,         1,          1,          1,         -1 },
 { NULL,       NULL,         "wiki-tui",     0,         1,          1,          1,         -1 },
 { NULL,       NULL,         "htop",         0,         1,          1,          1,         -1 },
 };
@@ -212,7 +212,7 @@ static const Key keys[] = {
 	{ MODKEY,		          XK_b,		spawn,		SHCMD(TERMINAL " -e newsboat ; pkill -RTMIN+6 dwmblocks") },
 	{ MODKEY|ShiftMask,		XK_b,		spawn,		{.v = (const char*[]){ BITWIG, NULL } } },
 	{ MODKEY, XK_n, spawn, {.v = (const char*[]){ TERMINAL, "-e", "sh", "-c", "cd /home/tetr/brain.exe/ && nvim", NULL } } },
-	{ MODKEY,			XK_m,		spawn,		{.v = (const char*[]){ TERMINAL, "-f", "monospace:size=15.5", "-g", "60x18", "-e", "rmpc", NULL }} },
+	{ MODKEY,			XK_m,		spawn,		{.v = (const char*[]){ TERMINAL, "-f", "monospace:size=15.5", "-g", "90x20", "-e", "rmpc", NULL }} },
 	{ MODKEY|ShiftMask,		XK_m,		spawn,		SHCMD("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle; kill -44 $(pidof dwmblocks)") },
 	{ MODKEY,			        XK_comma, 	spawn,		{.v = (const char*[]){ "mpc", "prev", NULL } } },
 	{ MODKEY|ShiftMask,		XK_comma,  	spawn,		{.v = (const char*[]){ "mpc", "seek", "0%", NULL } } },
