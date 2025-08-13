@@ -22,8 +22,8 @@ static char *fonts[]          = { "TerminessNerdFont:size=10:antialias=true:auto
 static char normbgcolor[]     = "#000000";
 static char normbordercolor[] = "#2b1329";
 static char normfgcolor[]     = "#ffffff";
-static char selfgcolor[]      = "#7f7f7f";
-static char selbordercolor[]  = "#eeeeee";
+static char selfgcolor[]      = "#eeeeee";
+static char selbordercolor[]  = "#7f7f7f";
 static char selbgcolor[]      = "#000000";
 static char *colors[][3] = {
        /*               fg           bg           border   */
@@ -58,9 +58,8 @@ static const Rule rules[] = {
 { NULL,       NULL,         "refresh",      0,         1,          1,          0,         -1 },
 { NULL,       NULL,         "nmtui",        0,         1,          1,          1,         -1 },
 { NULL,       NULL,         "synth",        0,         1,          1,          1,         -1 },
-{ NULL,       NULL,         "rmpc",         0,         1,          1,          1,         -1 },
+{ NULL,       NULL,         "pulsemixer",         0,         1,          1,          1,         -1 },
 { NULL,       NULL,         "wiki-tui",     0,         1,          1,          1,         -1 },
-{ NULL,       NULL,         "htop",         0,         1,          1,          1,         -1 },
 };
 
 /* layout(s) */
@@ -165,7 +164,7 @@ static const Key keys[] = {
 	{ MODKEY,			        XK_e,		spawn,		{.v = (const char*[]){ OBSIDIAN, NULL } } },
 	{ MODKEY|ShiftMask,		XK_e,		spawn,		{.v = (const char*[]){ TERMINAL, "-f", "monospace:size=16", "-g", "80x24", "-e", "calcurse", NULL }} },
 	{ MODKEY,		        	XK_r,		spawn,		{.v = (const char*[]){"yeay"} } },
-	{ MODKEY|ShiftMask,		XK_r,		spawn,		{.v = (const char*[]){ TERMINAL, "-f", "monospace:size=13", "-g", "95x45", "-e", "htop", NULL }} },
+	{ MODKEY|ShiftMask,		XK_r,		spawn,		{.v = (const char*[]){ TERMINAL, "-f", "monospace:size=13", "-e", "htop", NULL }} },
 	{ MODKEY,	        		XK_t,                  setlayout,              {.v = &layouts[0]} },
 	{ MODKEY|ShiftMask,		XK_t,          setlayout,              {.v = &layouts[1]} },
 	{ MODKEY,			        XK_y,                  setlayout,              {.v = &layouts[2]} },
@@ -212,7 +211,7 @@ static const Key keys[] = {
 	{ MODKEY,		          XK_b,		spawn,		SHCMD(TERMINAL " -e newsboat ; pkill -RTMIN+6 dwmblocks") },
 	{ MODKEY|ShiftMask,		XK_b,		spawn,		{.v = (const char*[]){ BITWIG, NULL } } },
 	{ MODKEY, XK_n, spawn, {.v = (const char*[]){ TERMINAL, "-e", "sh", "-c", "cd /home/tetr/brain.exe/ && nvim", NULL } } },
-	{ MODKEY,			XK_m,		spawn,		{.v = (const char*[]){ TERMINAL, "-f", "monospace:size=15.5", "-g", "90x20", "-e", "rmpc", NULL }} },
+	{ MODKEY,			XK_m,		spawn,		{.v = (const char*[]){ TERMINAL, "-f", "monospace:size=15.5", "-g", "90x20", "-e", "pulsemixer", NULL }} },
 	{ MODKEY|ShiftMask,		XK_m,		spawn,		SHCMD("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle; kill -44 $(pidof dwmblocks)") },
 	{ MODKEY,			        XK_comma, 	spawn,		{.v = (const char*[]){ "mpc", "prev", NULL } } },
 	{ MODKEY|ShiftMask,		XK_comma,  	spawn,		{.v = (const char*[]){ "mpc", "seek", "0%", NULL } } },
@@ -261,7 +260,7 @@ static const Key keys[] = {
 	{ 0, XF86XK_AudioStop,		    spawn,		{.v = (const char*[]){ "mpc", "stop", NULL } } },
 	{ 0, XF86XK_AudioRewind,	    spawn,		{.v = (const char*[]){ "mpc", "seek", "-10", NULL } } },
 	{ 0, XF86XK_AudioForward,	    spawn,		{.v = (const char*[]){ "mpc", "seek", "+10", NULL } } },
-	{ 0, XF86XK_AudioMedia,		    spawn,		{.v = (const char*[]){ TERMINAL, "-e", "rmpc", NULL } } },
+	{ 0, XF86XK_AudioMedia,		    spawn,		{.v = (const char*[]){ TERMINAL, "-e", "pulsemixer", NULL } } },
 	{ 0, XF86XK_AudioMicMute,	    spawn,		SHCMD("pactl set-source-mute @DEFAULT_SOURCE@ toggle") },
 	/* { 0, XF86XK_PowerOff,		spawn,		{.v = (const char*[]){ "sysact", NULL } } }, */
 	{ 0, XF86XK_Calculator,		    spawn,		{.v = (const char*[]){ TERMINAL, "-e", "bc", "-l", NULL } } },
