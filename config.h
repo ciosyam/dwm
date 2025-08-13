@@ -53,12 +53,12 @@ static const Rule rules[] = {
 { TERMCLASS,    "bg",         NULL,           1 << 7,    0,          1,          0,         -1 },
 { TERMCLASS,    "spterm",     NULL,           SPTAG(0),  1,          1,          0,         -1 },
 /*{ TERMCLASS,  "floatyeay",  NULL,           0,         1,          1,          0,         -1 },*/
-{ NULL,       NULL,         "rsmixer",   0,         1,          1,          0,         -1 },
+{ NULL,       NULL,         "pulsemixer",   0,         1,          1,          0,         -1 },
 { NULL,       NULL,         "bluetui",      0,         1,          0,          0,         -1 },
 { NULL,       NULL,         "refresh",      0,         1,          1,          0,         -1 },
 { NULL,       NULL,         "nmtui",        0,         1,          1,          1,         -1 },
 { NULL,       NULL,         "synth",        0,         1,          1,          1,         -1 },
-{ NULL,       NULL,         "pulsemixer",         0,         1,          1,          1,         -1 },
+{ NULL,       NULL,         "rmpc",         0,         1,          1,          1,         -1 },
 { NULL,       NULL,         "wiki-tui",     0,         1,          1,          1,         -1 },
 };
 
@@ -211,7 +211,7 @@ static const Key keys[] = {
 	{ MODKEY,		          XK_b,		spawn,		SHCMD(TERMINAL " -e newsboat ; pkill -RTMIN+6 dwmblocks") },
 	{ MODKEY|ShiftMask,		XK_b,		spawn,		{.v = (const char*[]){ BITWIG, NULL } } },
 	{ MODKEY, XK_n, spawn, {.v = (const char*[]){ TERMINAL, "-e", "sh", "-c", "cd /home/tetr/brain.exe/ && nvim", NULL } } },
-	{ MODKEY,			XK_m,		spawn,		{.v = (const char*[]){ TERMINAL, "-f", "monospace:size=15.5", "-g", "90x20", "-e", "pulsemixer", NULL }} },
+	{ MODKEY,			XK_m,		spawn,		{.v = (const char*[]){ TERMINAL, "-f", "monospace:size=15.5", "-g", "90x20", "-e", "rmpc", NULL }} },
 	{ MODKEY|ShiftMask,		XK_m,		spawn,		SHCMD("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle; kill -44 $(pidof dwmblocks)") },
 	{ MODKEY,			        XK_comma, 	spawn,		{.v = (const char*[]){ "mpc", "prev", NULL } } },
 	{ MODKEY|ShiftMask,		XK_comma,  	spawn,		{.v = (const char*[]){ "mpc", "seek", "0%", NULL } } },
@@ -232,7 +232,7 @@ static const Key keys[] = {
 	{ MODKEY,			XK_F1,		spawn,		{.v = (const char*[]){ "pipekill", NULL } } },
 	{ MODKEY,			XK_F2,		spawn,		{.v = (const char*[]){ "volume_down", NULL } } },
 	{ MODKEY,			XK_F3,		spawn,		{.v = (const char*[]){ "volume_up", NULL } } },
-	{ MODKEY,			XK_F4,		spawn,		{.v = (const char*[]){ TERMINAL, "-f", "monospace:size=14.5", "-g", "75x20", "-e", "rsmixer", NULL }} },
+	{ MODKEY,			XK_F4,		spawn,		{.v = (const char*[]){ TERMINAL, "-f", "monospace:size=14.5", "-g", "75x20", "-e", "pulsemixer", NULL }} },
 	{ MODKEY,			XK_F5,		spawn,	  {.v = (const char*[]){ "redshift-toggle", NULL } } },
 	{ MODKEY,			XK_F7,		spawn,		{.v = (const char*[]){ "brain-sync", NULL } } },
 	{ MODKEY,			XK_F8,		spawn,		{.v = (const char*[]){ "internet-toggle", NULL } } },
@@ -260,7 +260,7 @@ static const Key keys[] = {
 	{ 0, XF86XK_AudioStop,		    spawn,		{.v = (const char*[]){ "mpc", "stop", NULL } } },
 	{ 0, XF86XK_AudioRewind,	    spawn,		{.v = (const char*[]){ "mpc", "seek", "-10", NULL } } },
 	{ 0, XF86XK_AudioForward,	    spawn,		{.v = (const char*[]){ "mpc", "seek", "+10", NULL } } },
-	{ 0, XF86XK_AudioMedia,		    spawn,		{.v = (const char*[]){ TERMINAL, "-e", "pulsemixer", NULL } } },
+	{ 0, XF86XK_AudioMedia,		    spawn,		{.v = (const char*[]){ TERMINAL, "-e", "rmpc", NULL } } },
 	{ 0, XF86XK_AudioMicMute,	    spawn,		SHCMD("pactl set-source-mute @DEFAULT_SOURCE@ toggle") },
 	/* { 0, XF86XK_PowerOff,		spawn,		{.v = (const char*[]){ "sysact", NULL } } }, */
 	{ 0, XF86XK_Calculator,		    spawn,		{.v = (const char*[]){ TERMINAL, "-e", "bc", "-l", NULL } } },
