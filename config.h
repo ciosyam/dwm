@@ -62,7 +62,6 @@ static const Rule rules[] = {
 { NULL,         NULL,         "nmtui",        0,         1,          1,          1,         -1 },
 { NULL,         NULL,         "synth",        0,         1,          1,          1,         -1 },
 { NULL,         NULL,         "rmpc",         0,         1,          1,          1,         -1 },
-{ NULL,         NULL,         "wiki-tui",     0,         1,          1,          1,         -1 },
 };
 
 /* layout(s) */
@@ -163,7 +162,7 @@ static const Key keys[] = {
 	{ MODKEY,			        XK_q,		killclient,	{0} },
 	{ MODKEY|ShiftMask,		XK_q,		spawn,		SHCMD("sudo systemctl suspend") },
 	{ MODKEY|ShiftMask, 	XK_w,		spawn,		{.v = (const char*[]){ BROWSER, NULL } } },
-	{ MODKEY,		          XK_w,		spawn,		{.v = (const char*[]){ TERMINAL, "-f", "monospace:size=16", "-g", "80x24", "-e", "wiki-tui", NULL }} },
+	{ MODKEY,		          XK_w,		spawn,		{.v = (const char*[]){ TERMINAL, "-e", "offpunk", "/home/tetr/.cache/offpunk/gemini/offpunk.net/index.gmi",  NULL }} },
  	{ MODKEY|ShiftMask,		XK_n,		spawn,		{.v = (const char*[]){ TERMINAL, "-f", "monospace:size=14.5", "-g", "80x24", "-e", "nmtui", NULL }} },
 	{ MODKEY,			        XK_e,		spawn,		{.v = (const char*[]){ OBSIDIAN, NULL } } },
 	{ MODKEY|ShiftMask,		XK_e,		spawn,		{.v = (const char*[]){ TERMINAL, "-f", "monospace:size=16", "-g", "80x24", "-e", "calcurse", NULL }} },
